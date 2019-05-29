@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+    <group>
+        <item
+                android:id="@+id/navdrawer_menu_button_calendar"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/activity_main_drawer_menu_calendar"/>
+        <item
+                android:id="@+id/navdrawer_menu_button_settings"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/activity_main_drawer_menu_settings"/>
+    </group>
+
+</menu>
