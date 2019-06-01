@@ -2,6 +2,7 @@ package com.example.mygkeep.mvvm.view.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
@@ -28,7 +29,7 @@ class ListOfEntriesFragment: Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_listofentries,null)
         initUI(view)
         viewModel =
-            ViewModelProviders.of(this).get(MainViewModel::class.java)
+            ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
         viewModel.viewState().observe(this, Observer{ viewState ->
             viewState?.let { adapter.notes = viewState.notes }})
         return view
@@ -37,6 +38,7 @@ class ListOfEntriesFragment: Fragment() {
     fun initUI(view: View) {
         var fab : FloatingActionButton = view.findViewById(R.id.rv_fab_listofentries)
         fab.setOnClickListener { toast("fab is working") }
+
         var recyclerView : RecyclerView = view.findViewById(R.id.rv_listofentries)
         recyclerView.layoutManager = GridLayoutManager(activity, 2)
         recyclerView.setHasFixedSize(true)

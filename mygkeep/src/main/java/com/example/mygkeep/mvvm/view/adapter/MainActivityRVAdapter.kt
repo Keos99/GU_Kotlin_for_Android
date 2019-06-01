@@ -1,5 +1,6 @@
 package com.example.mygkeep.mvvm.view.adapter
 
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -34,8 +35,22 @@ class MainActivityRVAdapter : RecyclerView.Adapter<MainActivityRVAdapter.ViewHol
         fun bind(note: Note) = with(itemView) {
             tv_title.text = note.title
             tv_text.text = note.text
-            setBackgroundColor(note.color)
-        }
 
+            val color = when (note.color) {
+                Note.Color.WHITE -> R.color.white
+                Note.Color.YELOW -> R.color.yellow
+                Note.Color.GREEN -> R.color.green
+                Note.Color.BLUE -> R.color.blue
+                Note.Color.RED -> R.color.red
+                Note.Color.VIOLET -> R.color.violet
+                Note.Color.PINK -> R.color.pink
+            }
+
+            setBackgroundColor(ContextCompat.getColor(itemView.context, color))
+
+            setOnClickListener {
+                onItemClick?.invoke(note)
+            }
+        }
     }
 }
