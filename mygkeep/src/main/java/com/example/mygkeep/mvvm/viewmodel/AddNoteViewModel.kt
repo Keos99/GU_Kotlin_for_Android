@@ -1,6 +1,6 @@
 package com.example.mygkeep.mvvm.viewmodel
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.example.mygkeep.mvvm.model.entity.Note
 import ru.geekbrains.kotlin_3.data.NotesRepository
 

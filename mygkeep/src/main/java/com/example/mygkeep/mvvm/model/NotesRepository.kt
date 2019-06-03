@@ -1,7 +1,7 @@
 package ru.geekbrains.kotlin_3.data
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.mygkeep.mvvm.model.entity.Note
 import java.util.*
 

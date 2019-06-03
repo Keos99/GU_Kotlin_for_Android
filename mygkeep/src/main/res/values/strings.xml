@@ -9,4 +9,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="item_list_of_entries_text_example">Текст очень важной записи</string>
     <string name="item_list_of_entries_title_example">Очень важная запись</string>
+    <string name="note_title_hint">Заголовок</string>
+    <string name="note_text_hint">Текст</string>
+    <string name="note_new_note">Новая заметка</string>
 </resources>

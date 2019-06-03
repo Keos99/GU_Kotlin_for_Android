@@ -1,11 +1,11 @@
 package com.example.mygkeep.mvvm.viewmodel
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import ru.geekbrains.kotlin_3.data.NotesRepository
 
-class MainActivityViewModel: ViewModel() {
+class MainActivityViewModel : ViewModel() {
     private val viewStateLiveData: MutableLiveData<MainActivityViewState> = MutableLiveData()
 
     init {
