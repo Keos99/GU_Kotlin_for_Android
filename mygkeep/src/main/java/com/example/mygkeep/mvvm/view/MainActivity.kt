@@ -2,17 +2,16 @@ package com.example.mygkeep.mvvm.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import androidx.fragment.app.Fragment
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import com.example.mygkeep.R
 import com.example.mygkeep.mvvm.view.fragments.ListOfEntriesFragment
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.coordinator_layout.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,14 +20,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun initUi(){
-        drawerLayout = findViewById(R.id.drawer_layout)
-        var toggle = ActionBarDrawerToggle(this, drawerLayout,
+        var toggle = ActionBarDrawerToggle(this, drawer_layout,
             R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawerLayout.addDrawerListener(toggle)
+        drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-        var navigation: NavigationView = findViewById(R.id.nav_view)
-        navigation.setNavigationItemSelectedListener(this)
+        nav_view.setNavigationItemSelectedListener(this)
         changeFragmentTo(ListOfEntriesFragment.instance)
+        setSupportActionBar(toolbar)
     }
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {

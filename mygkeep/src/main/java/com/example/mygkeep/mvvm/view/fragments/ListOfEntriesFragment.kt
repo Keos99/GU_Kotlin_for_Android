@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import com.example.mygkeep.R
 import com.example.mygkeep.mvvm.view.adapter.MainActivityRVAdapter
 import com.example.mygkeep.mvvm.viewmodel.MainActivityViewModel
-import org.jetbrains.anko.support.v4.toast
 
 class ListOfEntriesFragment: Fragment() {
     companion object {
@@ -35,11 +34,19 @@ class ListOfEntriesFragment: Fragment() {
 
     fun initUI(view: View) {
         var fab : FloatingActionButton = view.findViewById(R.id.rv_fab_listofentries)
-        fab.setOnClickListener { toast("fab is working") }
+        fab.setOnClickListener {
+            changeFragmentTo(NoteFragment.getInstance(null))
+        }
 
         var recyclerView : RecyclerView = view.findViewById(R.id.rv_listofentries)
         recyclerView.layoutManager = GridLayoutManager(activity, 2)
         recyclerView.setHasFixedSize(true)
+    }
+
+    fun changeFragmentTo(newInstance: Fragment){
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.fl_master, newInstance)
+            ?.addToBackStack("Fragment")?.commit()
     }
 }
 
