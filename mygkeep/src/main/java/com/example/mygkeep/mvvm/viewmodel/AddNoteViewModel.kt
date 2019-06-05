@@ -1,8 +1,8 @@
 package com.example.mygkeep.mvvm.viewmodel
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.example.mygkeep.mvvm.model.entity.Note
-import ru.geekbrains.kotlin_3.data.NotesRepository
+import com.example.mygkeep.mvvm.model.NotesRepository
 
 class AddNoteViewModel : ViewModel() {
     private var pendingNote: Note? = null

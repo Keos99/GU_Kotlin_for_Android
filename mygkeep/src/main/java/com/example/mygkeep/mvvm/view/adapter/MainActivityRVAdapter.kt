@@ -1,7 +1,7 @@
 package com.example.mygkeep.mvvm.view.adapter
 
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +10,12 @@ import com.example.mygkeep.mvvm.model.entity.Note
 import kotlinx.android.synthetic.main.item_list_of_entries.view.*
 
 class MainActivityRVAdapter : RecyclerView.Adapter<MainActivityRVAdapter.ViewHolder>() {
+
     var notes: List<Note> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -48,9 +48,9 @@ class MainActivityRVAdapter : RecyclerView.Adapter<MainActivityRVAdapter.ViewHol
 
             setBackgroundColor(ContextCompat.getColor(itemView.context, color))
 
-            setOnClickListener {
-                onItemClick?.invoke(note)
-            }
+            itemView.setOnClickListener(View.OnClickListener {
+                TODO("переход на фрагмент NOTE" )
+            })
         }
     }
 }

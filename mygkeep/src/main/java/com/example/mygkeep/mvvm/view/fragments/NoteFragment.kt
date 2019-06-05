@@ -1,29 +1,32 @@
 package com.example.mygkeep.mvvm.view.fragments
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.design.widget.TextInputEditText
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
+import androidx.core.content.res.ResourcesCompat
 import com.example.mygkeep.R
 import com.example.mygkeep.mvvm.model.entity.Note
 import com.example.mygkeep.mvvm.viewmodel.AddNoteViewModel
+import kotlinx.android.synthetic.main.coordinator_layout.*
+import kotlinx.android.synthetic.main.fragment_note.*
 import java.util.*
 
-class AddNoteFragment : Fragment() {
+class NoteFragment (var note: Note?) : Fragment() {
+
     companion object {
-        val instance = AddNoteFragment()
+        fun getInstance(note: Note?) : Fragment{
+            val instance = NoteFragment(note)
+            return instance
+        }
     }
-    private var note: Note? = null
+
     lateinit var viewModel: AddNoteViewModel
-    lateinit var editText: EditText
-    lateinit var textInputEditText: TextInputEditText
 
     val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
@@ -34,23 +37,22 @@ class AddNoteFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater.inflate(R.layout.fragment_addnote,null)
-        initUI()
+        val view: View = inflater.inflate(R.layout.fragment_note,null)
         viewModel = ViewModelProviders.of(this).get(AddNoteViewModel::class.java)
-        note = TODO()
+        toolbar?.title = note?.let {
+            it.title
+        } ?: let {
+            getString(R.string.note_new_note)
+        }
+        initView()
 
         return view
     }
 
-    fun initUI (view: View) {
-        editText = view.findViewById(R.id.et_text)
-        textInputEditText = view.findViewById(R.id.et_title)
-    }
-
     private fun initView() {
         note?.let { note ->
-            textInputEditText.setText(note.title)
-            editText.setText(note.text)
+            et_title.setText(note.title)
+            et_text.setText(note.text)
             val color = when (note.color) {
                 Note.Color.WHITE -> R.color.white
                 Note.Color.YELOW -> R.color.yellow
@@ -60,23 +62,24 @@ class AddNoteFragment : Fragment() {
                 Note.Color.VIOLET -> R.color.violet
                 Note.Color.PINK -> R.color.pink
             }
+            toolbar.setBackgroundColor(ResourcesCompat.getColor(resources, color, null))
         }
-        textInputEditText.addTextChangedListener(textWatcher)
-        editText.addTextChangedListener(textWatcher)
+        et_title.addTextChangedListener(textWatcher)
+        et_text.addTextChangedListener(textWatcher)
     }
 
     private fun saveNote() {
-        if (textInputEditText.text == null || textInputEditText.text!!.length < 3) return
+        if (et_title.text == null || et_title.text!!.length < 3) return
         note = note?.copy(
-            title = textInputEditText.text.toString(),
-            text = editText.text.toString(),
+            title = et_title.text.toString(),
+            text = et_text.text.toString(),
             lastChanged = Date()
         ) ?: createNewNote()
 
         if (note != null) viewModel.save(note!!)
     }
 
-    fun createNewNote() = Note(UUID.randomUUID().toString(), textInputEditText.text.toString(), editText.toString())
+    fun createNewNote() = Note(UUID.randomUUID().toString(), et_title.text.toString(), et_text.toString())
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         android.R.id.home -> {

@@ -1,21 +1,18 @@
 package com.example.mygkeep.mvvm.view.fragments
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.mygkeep.R
 import com.example.mygkeep.mvvm.view.adapter.MainActivityRVAdapter
 import com.example.mygkeep.mvvm.viewmodel.MainActivityViewModel
-import kotlinx.android.synthetic.main.fragment_listofentries.*
-import org.jetbrains.anko.support.v4.toast
 
 class ListOfEntriesFragment: Fragment() {
     companion object {
@@ -37,11 +34,19 @@ class ListOfEntriesFragment: Fragment() {
 
     fun initUI(view: View) {
         var fab : FloatingActionButton = view.findViewById(R.id.rv_fab_listofentries)
-        fab.setOnClickListener { toast("fab is working") }
+        fab.setOnClickListener {
+            changeFragmentTo(NoteFragment.getInstance(null))
+        }
 
         var recyclerView : RecyclerView = view.findViewById(R.id.rv_listofentries)
         recyclerView.layoutManager = GridLayoutManager(activity, 2)
         recyclerView.setHasFixedSize(true)
+    }
+
+    fun changeFragmentTo(newInstance: Fragment){
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.fl_master, newInstance)
+            ?.addToBackStack("Fragment")?.commit()
     }
 }
 
