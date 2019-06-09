@@ -15,6 +15,7 @@ import com.example.mygkeep.mvvm.view.adapter.MainActivityRVAdapter
 import com.example.mygkeep.mvvm.viewmodel.MainActivityViewModel
 
 class ListOfEntriesFragment: Fragment() {
+    //TODO
     companion object {
         val instance = ListOfEntriesFragment()
     }
