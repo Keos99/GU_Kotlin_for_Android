@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.mygkeep.mvvm.model.entity.Note
 import com.example.mygkeep.mvvm.model.NotesRepository
 
-class AddNoteViewModel : ViewModel() {
+class NoteViewModel : ViewModel() {
     private var pendingNote: Note? = null
 
     fun save(note: Note) {

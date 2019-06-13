@@ -13,7 +13,7 @@ class LogoutDialog : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?) =
-        AlertDialog.Builder(context)
+        AlertDialog.Builder(context!!)
             .setTitle("Выход")
             .setMessage("Вы уверены, что хотите выйти?")
             .setPositiveButton("Да") { dialog, whitch -> (activity as? LogoutListener)?.let { it.onLogout() }}
