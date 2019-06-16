@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import com.example.mygkeep.R
 import com.example.mygkeep.mvvm.model.entity.Note
-import com.example.mygkeep.mvvm.viewmodel.AddNoteViewModel
+import com.example.mygkeep.mvvm.viewmodel.NoteViewModel
 import kotlinx.android.synthetic.main.coordinator_layout.*
 import kotlinx.android.synthetic.main.fragment_note.*
 import java.util.*
@@ -26,7 +26,7 @@ class NoteFragment (var note: Note?) : Fragment() {
         }
     }
 
-    lateinit var viewModel: AddNoteViewModel
+    lateinit var viewModel: NoteViewModel
 
     val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
@@ -38,7 +38,7 @@ class NoteFragment (var note: Note?) : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.fragment_note,null)
-        viewModel = ViewModelProviders.of(this).get(AddNoteViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(NoteViewModel::class.java)
         toolbar?.title = note?.let {
             it.title
         } ?: let {

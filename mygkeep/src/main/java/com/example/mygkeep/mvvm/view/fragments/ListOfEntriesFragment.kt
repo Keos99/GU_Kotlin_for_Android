@@ -11,25 +11,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.mygkeep.R
+import com.example.mygkeep.mvvm.model.entity.Note
 import com.example.mygkeep.mvvm.view.adapter.MainActivityRVAdapter
-import com.example.mygkeep.mvvm.viewmodel.MainActivityViewModel
+import com.example.mygkeep.mvvm.viewmodel.ListOfEntriesViewModel
+import com.example.mygkeep.mvvm.viewmodel.ListOfEntriesViewState
 
-class ListOfEntriesFragment: Fragment() {
+class ListOfEntriesFragment: BaseFragment<List<Note>?, ListOfEntriesViewState>() {
     //TODO
     companion object {
         val instance = ListOfEntriesFragment()
     }
 
-    lateinit var viewModel : MainActivityViewModel
+    override val layoutRes: Int = R.layout.fragment_listofentries
+    override lateinit var viewModel : ListOfEntriesViewModel
     lateinit var adapter : MainActivityRVAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view: View = inflater.inflate(R.layout.fragment_listofentries,null)
         initUI(view)
         viewModel =
-            ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+            ViewModelProviders.of(this).get(ListOfEntriesViewModel::class.java)
         viewModel.viewState().observe(this, Observer{ viewState ->
-            viewState?.let { adapter.notes = viewState.notes }})
+            viewState?.let { adapter.notes = viewState.notes!! }})
         return view
     }
 
@@ -48,6 +51,10 @@ class ListOfEntriesFragment: Fragment() {
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.fl_master, newInstance)
             ?.addToBackStack("Fragment")?.commit()
+    }
+
+    override fun renderData(data: List<Note>?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
 
